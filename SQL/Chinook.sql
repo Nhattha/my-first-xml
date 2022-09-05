@@ -12,3 +12,20 @@ SELECT gen.name, invi.quantity, invi.UnitPrice, inv.invoicedate, strftime("%Y", 
 JOIN tracks tra on tra.genreid = gen.genreid
 join invoice_items invi on invi.trackid = tra.trackid
 join invoices inv on inv.invoiceid = invi.InvoiceId
+
+-- To find top country for expanding business
+SELECT cus.country, strftime("%Y",inv.invoicedate), invi.quantity, invi.unitprice from customers cus
+join invoices inv ON inv.customerid = cus.customerid
+join invoice_items invi on invi.InvoiceId = inv.invoiceid
+
+SELECT cus.country, strftime("%Y",inv.invoicedate), invi.quantity, invi.unitprice from customers cus
+join invoices inv ON inv.customerid = cus.customerid
+join invoice_items invi on invi.InvoiceId = inv.invoiceid
+
+-- To check NULL value
+select count(*) from invoice_items WHERE quantity is NULL
+
+-- To count classical value
+SELECT * from tracks tra
+join genres gen on gen.genreid = tra.genreid
+where gen.name = "Classical"
